@@ -61,7 +61,7 @@
 					</div>
 					<div>
 						<p>You not have an account ? </p>
-						<a href="/register" color='blue'> Register</a>
+						<a href="/register" class="btn-btn primary"> Register</a>
 					</div>
 				</form>
 				

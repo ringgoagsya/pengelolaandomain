@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class platform extends Model
 {
-    //public function pengelola()
-    //{
-    //    return $this->hasMany(pengelola::class);
-   // }
+    public function pengajuan()
+    {
+        return $this->hasMany(pengelola::class,'id_platform','id');
+   }
 }

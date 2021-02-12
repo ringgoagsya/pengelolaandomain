@@ -46,4 +46,8 @@ class pengajuan extends Model
                 break;    
         }
     }
+    public function platform()
+    {
+        return $this->belongsTo(unit::class,'id_platform','id');
+    }
 }

@@ -58,8 +58,11 @@ Route::post('/mahasiswa/storedos/{id}','MahasiswaController@storedos')->name('st
 Route::get('/logina', function(){
     return view('login.login');
 })->name('login');
-Route::get('/register','UnitController@index');
-Route::post('/daftar','PengelolaController@store');
+Route::get('/login/daftar', function(){
+    return view('login.daftar');
+});
+Route::get('/register','UnitController@create');
+Route::post('/daftar','UnitController@store')->name('simpanpengelola');
 
 
 Route::post('/masuk', 'loginController@login')->name('masuk');

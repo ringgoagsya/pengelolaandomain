@@ -74,14 +74,14 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        'pengelola' => [
+        'pengelolas' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'pengelolas',
         ],
 
-        'apipengelola' => [
+        'apipengelolas' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'pengelolas',
         ],
     ],
 
@@ -115,10 +115,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\login_dosen::class,
         ],
-
-        'pengelola' => [
+        'pengelolas' => [
             'driver' => 'eloquent',
-            'model' => App\pengelola::class,
+            'model' => App\login_pengelola::class,
          ],
     ],
 
@@ -140,6 +139,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'pengelolas' => [
+            'provider' => 'pengelolas',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

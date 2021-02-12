@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\pengelola;
 use App\unit;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        $unit=unit::all();
+        return view('login.register', compact('unit'));
     }
 
     /**
@@ -36,7 +38,17 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        pengelola::create([
+            'name' => $request->name,
+            'penanggung_jawab' => $request->penanggung_jawab,
+            'id_unit' => $request->id_unit,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'password' => $request->password
+            ]);
+
+        
+        return redirect()->route('login')->with('pesanregister','Pendaftaran Berhasil Siahkan Login !');
     }
 
     /**

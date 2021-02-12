@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class pengelola extends Model
 {
@@ -12,7 +15,7 @@ class pengelola extends Model
         'id_unit',
         'telp',
         'email',
-        'password',
+        'password'
       ];
     public function unit()
     {

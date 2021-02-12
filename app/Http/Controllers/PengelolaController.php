@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\pengelola;
+use App\login_pengelola;
 use App\platform;
 use App\pengajuan;
 use App\unit;
@@ -17,7 +18,13 @@ class PengelolaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:pengelola');
+        $this->middleware('auth:pengelolas');
+    }
+    public function daftarpengelola()
+    {
+        $pengelola=pengelola::all();
+        $unit=unit::all();
+        return view('login.register',compact('unit','pengelola'));
     }
     public function index()
     {
@@ -56,27 +63,14 @@ class PengelolaController extends Controller
      */
     public function create()
     {
-        //
+        $unit=unit::all();
+        return view('login.register', compact('unit'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function storepengeloxla(Request $request)
     {
-        pengelola::create([
-            'name' => $request['name'],
-            'penanggung_jawab' => $request['penanggung_jawab'],
-            'id_unit' => $request['id_unit'],
-            'telp' => $request['telp'],
-            'email' => $request['email'],
-            'email' => $request['email'],
-            'password' => $request['password']
-            ]);
-        return redirect()->route('login')->with('pesanregister','Pendaftaran Berhasil Siahkan Login !');
+       //
         
     }
 

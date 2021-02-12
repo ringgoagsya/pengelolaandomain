@@ -55,7 +55,7 @@
                 @forelse($pengajuan as $ra)
                     <tr>
                         <td>
-                            @if($ra->id_platform==1)
+                            {@if($ra->id_platform==1)
                             {
                                 Wordpress
                             }
@@ -67,7 +67,7 @@
                             {
                                 belum memilih
                             }
-                            @endif
+                            @endif}
                             
                         </td>
                         <td>

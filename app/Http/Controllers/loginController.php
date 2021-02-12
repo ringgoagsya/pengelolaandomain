@@ -32,7 +32,7 @@ class loginController extends Controller
             return redirect('/mahasiswa');
         }    
         elseif (count($datapeng)>0) {
-            Auth::guard('pengelola')->loginUsingId($datapeng[0]['id']);
+            Auth::guard('pengelolas')->loginUsingId($datapeng[0]['id']);
             return redirect('/pengelola');
             
         } elseif (count($datadsn)>0){
@@ -50,6 +50,9 @@ class loginController extends Controller
     function logout(){
         if (Auth::guard('mahasiswa')->check()) {
         Auth::guard('mahasiswa')->logout();
+        }
+        elseif (Auth::guard('pengelolas')->check()) {
+        Auth::guard('pengelolas')->logout();
         } elseif (Auth::guard('dosen')->check()) {
             Auth::guard('dosen')->logout();
         } elseif (Auth::guard('user')->check()) {
