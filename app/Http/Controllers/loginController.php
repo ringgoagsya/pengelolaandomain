@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\admin;
 use App\pengelola;
 use Illuminate\Support\Facades\Auth;
 use\App\model\mahasiswa;
@@ -26,6 +27,9 @@ class loginController extends Controller
         $datauser = user::where('email', $request->email)
                             ->where('password', $request->password)
                             ->get();
+        $dataadmins = admin::where('email', $request->email)
+                            ->where('password', $request->password)
+                            ->get();
 
         if (count($datamhs)>0) {
             Auth::guard('mahasiswa')->loginUsingId($datamhs[0]['id']);
@@ -34,6 +38,11 @@ class loginController extends Controller
         elseif (count($datapeng)>0) {
             Auth::guard('pengelolas')->loginUsingId($datapeng[0]['id']);
             return redirect('/pengelola');
+            
+        } 
+        elseif (count($dataadmins)>0) {
+            Auth::guard('admins')->loginUsingId($dataadmins[0]['id']);
+            return redirect('/admins');
             
         } elseif (count($datadsn)>0){
             Auth::guard('dosen')->loginUsingId($datadsn[0]['id']);

@@ -9,7 +9,7 @@
           <img alt="Image placeholder" src="{{ asset('assets/img/brand/unand.png') }}">
         </span>
         <div class="media-body  ml-2  d-none d-lg-block">
-          <span class="mb-0 text-sm  font-weight-bold">User</span>
+          <span class="mb-0 text-sm  font-weight-bold">Admin</span>
         </div>
       </div>
     </a>

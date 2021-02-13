@@ -8,6 +8,6 @@ class platform extends Model
 {
     public function pengajuan()
     {
-        return $this->hasMany(pengelola::class,'id_platform','id');
+        return $this->hasMany(pengajuan::class,'id_platform','id');
    }
 }

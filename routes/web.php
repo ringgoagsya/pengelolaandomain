@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index')->name('Admin.home');
+Route::get('/admins', 'adminsController@home')->name('admins.home');
 Route::get('/mahasiswa', 'MahasiswaController@index')->name('Mahasiswa.home');
 Route::get('/dosen', 'DosenController@index')->name('Dosen.home');
 Route::get('/pengelola','PengelolaController@home')->name('Pengelola.home');
@@ -34,6 +35,11 @@ Route::get('/pengelola/index','PengelolaController@index')->name('pengelolaIndex
 Route::get('/pengelola/daftardomain','PengelolaController@daftardomain')->name('daftardomain');
 Route::get('/pengelola/profil','PengelolaController@profil')->name('profil');
 Route::post('/pengelola/index','PengelolaController@storepengajuan')->name('pengajuanstore');
+
+//Route Admin
+Route::get('/admins/daftardomain','adminsController@index')->name('indexadmins');
+Route::get('/admins/terima/{id}', 'adminsController@terima')->name('terima');
+Route::get('/admins/tolak/{id}', 'adminsController@tolak')->name('tolak');
 
 //Route By Ciwi Ciwi
 Route::get('/mahasiswa/list/{id}/tambah','MahasiswaController@tambah')->name('tambahjudul');

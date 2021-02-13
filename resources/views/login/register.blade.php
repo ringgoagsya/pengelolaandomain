@@ -29,27 +29,30 @@
 </head>
 <body>
 	
-<div class="limiter">
-	<div class="container-login100">
-		<div class="wrap-login100">
-		<div><center><img src="login/images/unand.png" width="30%"></center></div>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+	<form class="login100-form validate-form" action="/daftar" method="post">
+          @csrf
+          <div><center><img src="login/images/unand.png" width="30%"></center></div>
 					<span class="login100-form-title p-b-34">
 						Form Pendaftaran
 					</span>
-		</div>
-       		<form action="{{route('simpanpengelola')}}" method="post" enctype="multipart/form-data"> 
-				@csrf
-				@method('POST')
-                    <div class="form-group">
-                        <label for="name">Nama Pengelola</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Nama">
+					<div>
+                    <label for="name">Nama Pengelola</label>
+                    <div class="wrap-input100  validate-input m-b-20" data-validate="Type user name">
+						<input id="name" class="input100" type="text" name="name" placeholder="name">
+						<span class="focus-input100"></span>
+					</div>
                     </div>
-                    <div class="form-group">
-                        <label for="penanggung_jawab">Penanggung Jawab</label>
-                        <input type="text" name="penanggung_jawab" id="penanggung_jawab" placeholder="penanggung_jawab" class="form-control">
+					<div>
+                    <label for="penanggung_jawab">Nama Pengelola</label>
+                    <div class="wrap-input100  validate-input m-b-20" data-validate="Type user penanggung_jawab">
+						<input id="penanggung_jawab" class="input100" type="text" name="penanggung_jawab" placeholder="penanggung_jawab">
+						<span class="focus-input100"></span>
+					</div>
                     </div>
-
-
+				
                     <div class="form-group">
                         <label for="">Unit/ Bagian</label>
                         
@@ -60,30 +63,37 @@
                         </select>
                         
                     </div>
-
-                    <div class="form-group">
-                        <label for="telp">No. Hp</label>
-                        <input type="text" name="telp" id="telp" placeholder="telp" class="form-control">
+					<div>
+                    <label for="telp">No. HP</label>
+                    <div class="wrap-input100  validate-input m-b-20" data-validate="Type user telp">
+						<input id="telp" class="input100" type="text" name="telp" placeholder="telp">
+						<span class="focus-input100"></span>
+					</div>
                     </div>
-					<div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="text" name="email" id="email" placeholder="email" class="form-control">
+                    <div>
+                    <label for="">Email</label>
+                    <div class="wrap-input100  validate-input m-b-20" data-validate="Type user name">
+						<input id="first-name" class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+					</div>
                     </div>
-					<div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="password" class="form-control">
+                    <div>
+                    <label for="">Password</label>
+					<div class="wrap-input100 validate-input m-b-20" data-validate="Type password">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
                     </div>
-                    
 					
-						<div class="form-group">
-							
-							<button type="submit" class="btn btn-primary">Daftar</button>
-						</div>
-					
+					<div style="color:#453aa4" class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Daftar
+						</button>
+					</div>
 				</form>
 				
 
-				
+				<div class="login100-more" style="background-image: url('login/images/bg-01.jpg');"></div>
 			</div>
 		</div>
 	</div>

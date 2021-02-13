@@ -46,7 +46,7 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        // MultiLogin Fandy
+        // MultiLogin Ringgo
         'mahasiswa' => [
             'driver' => 'session',
             'provider' => 'mahasiswa',
@@ -55,6 +55,15 @@ return [
         'apimahasiswa' => [
             'driver' => 'token',
             'provider' => 'mahasiswa',
+        ],
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'apiadmins' => [
+            'driver' => 'token',
+            'provider' => 'admins',
         ],
         'dosen' => [
             'driver' => 'session',
@@ -106,6 +115,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\login_admin::class,
         ],
         'mahasiswa' => [
             'driver' => 'eloquent',

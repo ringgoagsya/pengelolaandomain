@@ -83,19 +83,20 @@ class PengelolaController extends Controller
         $id_counter = pengajuan::count();
         $id_pengajuan = $id_counter++;
         
+        $folder = 'public/sertifikat';
+        $filename = $id_pengajuan.'_Surat_'.$user_id.'_'. $request->file('surat')->getClientOriginalName();
+        $filepath = $request->surat->storeAs($folder,$filename);
 
         $pengajuan = pengajuan::insertGetId([
             'id_user'=> $user_id,
             'id_platform' => $request->id_platform,
             'nama_domain' => $request->nama_domain,
             'desk_domain' => $request->desk_domain,
-            'surat' => $request->surat,
+            'surat' => $filename,
             'status' => 0
         ]);
 
-        $folder = 'public/sertifikat';
-        $filename = $id_pengajuan.'_Surat_'.$user_id.'_'. $request->file('surat')->getClientOriginalName();
-        $filepath = $request->surat->storeAs($folder,$filename);
+
 
 
         return redirect()->route('daftardomain')->with('pesan','Berhasil Ajukan Pembuatan Domain');

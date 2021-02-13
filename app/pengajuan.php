@@ -48,6 +48,6 @@ class pengajuan extends Model
     }
     public function platform()
     {
-        return $this->belongsTo(unit::class,'id_platform','id');
+        return $this->belongsTo(platform::class,'id_platform','id');
     }
 }

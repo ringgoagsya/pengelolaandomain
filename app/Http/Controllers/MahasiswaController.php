@@ -115,10 +115,7 @@ class MahasiswaController extends Controller
         
     }
 
-    public function pilihunit(){
-        $nama_unit = unit::get();
-        return view('mahasiswa.dosbing', compact("nama_unit"));
-    }
+
 
     public function pilihdosbing(){
         $dosen = dosen::get();

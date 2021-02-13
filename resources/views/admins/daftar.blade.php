@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.baseadmin')
 @section('content')
     <!-- Header -->
     <!-- Header -->
@@ -32,9 +32,9 @@
                             Cek Kembali Input Anda !!
                         </div>
                         @endif
-                  <center>
+                  <!-- <center>
                    <a type="button" class="btn btn-outline-primary col-md-11" href = "{{route('pengelolaIndex')}}">Tambah Pengajuan Domain</a> <br>
-                  </center>
+                  </center> -->
                     <div class="card-body">
                          <div class="card">
                          	
@@ -46,9 +46,7 @@
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>Pesan</th>
+                    <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,21 +78,17 @@
                         <td>
                           {!!$ra->status_text!!}
                         </td>
+                        
                         <td>
-                          <a href="{{route('tambahjudul',[$ra->id])}}" class="btn btn-primary 
-                            @if ($ra->status!=2)
-                                disabled
-                            @endif
-                            btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
-                         
-                          <td>
-                            <a href="{{route('tdos',[$ra->id])}}" class="btn btn-primary btn-sm 
-                              @if ($ra->status!=2)
-                                  disabled 
-                              @endif
-                              " ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
+                        @if ($ra->status==0)
+                                  <a href="{{ route('terima', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+                                  <a href="{{ route('tolak', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
+                                </i></a>
+
+                                @elseif($ra->status==1 || $ra->status==2)
+                                {!!$ra->status_text!!}
+                                @endif
+                        </td>
 
                         <td>
                           @if ($ra->catatan_dosen)
