@@ -37,38 +37,22 @@ class adminsController extends Controller
         return view('admins.admins',compact('admins','user_id'));
     }
     public function terima($id){
-        $user_id = auth()->user()->id;
-        $data=Detail_dosbing::where('id_dosen', '=', $user_id)
-                        ->get();
-        $counter = Detail_dosbing::join('rancangan','rancangan.id','=','detail_dosbing.id_rancangan')
-                        ->where('detail_dosbing.id_dosen', '=', $user_id)
-                        ->where('rancangan.status', '>',1)
-                                    ->count();
 
-        if ($counter<=10) {
-            # code...
-            $updates = Rancangan::where('id', $id)->first();
-            Rancangan::where('id', $id)
-              ->update(['status' => 2]);
-            
-            Mahasiswa::where('id', $updates->id_mahasiswa)
-              ->update(['status' => 1]);
+        pengajuan::where('id', $id)
+              ->update(['status' => 3]);
+              $pengajuan=pengajuan::all();
             
             
-            return redirect()->route('Dosen.home', compact('data'))->with('pesan','Berhasil Menerima Mahasiswa');
-        } else {
-            Rancangan::where('id', $id)
-            ->update(['status' => 1,
-            'catatan_dosen' => 'Penuh']);
-             return redirect()->route('Dosen.home', compact('data'))->with('pesans','Penuh');
-        }
+            return view('admins.daftar', compact('pengajuan'))->with('pesan','Berhasil Menerima pengajuan');
     
     }
     public function tolak($id){
-        $data = Rancangan::where('id',$id)->first();
+        $update=pengajuan::where('id', $id)
+              ->update(['status' => 1]);
+            
 
 
-        return view('dosen.tolak', compact('data','id'));
+        return view('admins.tolak', compact('update'))->with('pesan','Pengajuan ditolak');
         
     }
 
@@ -77,9 +61,13 @@ class adminsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $status = config('status.status');
+        $user_id = auth()->user()->id;
+        $pengajuan = pengajuan::find($id);
+        $domain = domain::all();
+        return view('admins.domain.create',compact('pengajuan','user_id'));
     }
 
     /**
@@ -88,9 +76,16 @@ class adminsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        $id_pengajuan=pengajuan::find($id);
+        $domain=domain::insertGetId([
+            'id_pengajuan'=>$id_pengajuan->id,
+            'ip' => $request->ip,
+            'username'=>$request->username,
+            'password'=>$request->password
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -99,6 +94,12 @@ class adminsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function profiladmin()
+    {
+        $user_id = auth()->user()->id;
+        $admins = admin::where('id',$user_id)->get();
+        return view('admins.profil',compact('admins'));
+    }
     public function show($id)
     {
         //

@@ -47,7 +47,6 @@
                     <th>Unit</th>
                     <th>No.hp</th>
                     <th>E-mail</th>
-                    <th>-</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -69,36 +68,16 @@
                         <td>
                         {{$ra->email}}
                         </td>
+                        
                         <td>
-                          {!!$ra->status_text!!}
+                          <a href="" class="btn btn-primary  btn-sm" title="Edit Profil" ><i class="far fa-edit" aria-hidden="true" title="Edit Profil"></i></a>
                         </td>
-                        <td>
-                          <a href="{{route('tambahjudul',[$ra->id])}}" class="btn btn-primary 
-                            @if ($ra->status!=2)
-                                disabled
-                            @endif
-                            btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
                          
-                          <td>
-                            <a href="{{route('tdos',[$ra->id])}}" class="btn btn-primary btn-sm 
-                              @if ($ra->status!=2)
-                                  disabled 
-                              @endif
-                              " ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
 
-                        <td>
-                          @if ($ra->catatan_dosen)
-                          {{$ra->catatan_dosen}}
-                          @else
-                          Belum Ada Pesan
-                          @endif
-                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5">Belum ada list ide TA</td>
+                        <td colspan="5">Belum ada Profil</td>
                     </tr>
                 @endforelse
                 </tbody>

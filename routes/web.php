@@ -29,17 +29,24 @@ Route::get('/pengelola','PengelolaController@home')->name('Pengelola.home');
 
 Route::resource('user', 'UserController');
 Route::get('dataTableUSer', 'UserController@dataTable')->name('dataTableUser');
+Route::get('/pengelola/referensi','DomainController@referensi')->name('referensi');
 //Route Pengelola
 
 Route::get('/pengelola/index','PengelolaController@index')->name('pengelolaIndex');
 Route::get('/pengelola/daftardomain','PengelolaController@daftardomain')->name('daftardomain');
+Route::get('/pengelola/lihatdomain','PengelolaController@lihatdomain')->name('lihatdomain');
 Route::get('/pengelola/profil','PengelolaController@profil')->name('profil');
 Route::post('/pengelola/index','PengelolaController@storepengajuan')->name('pengajuanstore');
 
 //Route Admin
 Route::get('/admins/daftardomain','adminsController@index')->name('indexadmins');
+Route::get('/admins/referensi','DomainController@referensiadmin')->name('referensiadmin');
 Route::get('/admins/terima/{id}', 'adminsController@terima')->name('terima');
 Route::get('/admins/tolak/{id}', 'adminsController@tolak')->name('tolak');
+Route::get('/admins/adddomain/{id}','adminsController@create')->name('adddomain');
+Route::post('/admins/adddomain/{id}','adminsController@store')->name('storedomain');
+Route::get('admins/daftardomain/list','DomainController@index')->name('indexname');
+Route::get('/admins/profil','adminsController@profiladmin')->name('profiladmin');
 
 //Route By Ciwi Ciwi
 Route::get('/mahasiswa/list/{id}/tambah','MahasiswaController@tambah')->name('tambahjudul');
@@ -73,9 +80,9 @@ Route::post('/daftar','UnitController@store')->name('simpanpengelola');
 
 Route::post('/masuk', 'loginController@login')->name('masuk');
 Route::get('/keluar', 'loginController@logout')->name('keluar');
-Route::get('/dosen/terima/{id}', 'dosenController@terima')->name('terima');
+Route::get('/dosen/terima/{id}', 'dosenController@terima')->name('terimas');
 Route::get('/dosen/grup', 'dosenController@grup')->name('dosen.grup');
-Route::get('/dosen/tolak/{id}', 'dosenController@tolak')->name('tolak');
+Route::get('/dosen/tolak/{id}', 'dosenController@tolak')->name('tolakss');
 Route::post('/dosen/tolak/{id}/tolaks', 'dosenController@tolaks')->name('tolaks');
 
 

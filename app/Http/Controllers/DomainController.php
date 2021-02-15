@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\domain;
+use App\pengajuan;
+use App\pengelola;
+
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -14,7 +17,8 @@ class DomainController extends Controller
      */
     public function index()
     {
-        //
+        $domain = domain::all();
+        return view('admins.domain.show',compact('domain'));
     }
 
     /**
@@ -25,6 +29,14 @@ class DomainController extends Controller
     public function create()
     {
         //
+    }
+    public function referensi()
+    {
+        return view('pengelola.referensi');
+    }
+    public function referensiadmin()
+    {
+        return view('admins.referensi');
     }
 
     /**

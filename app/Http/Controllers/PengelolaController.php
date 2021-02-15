@@ -7,6 +7,7 @@ use App\login_pengelola;
 use App\platform;
 use App\pengajuan;
 use App\unit;
+use App\domain;
 use Illuminate\Http\Request;
 
 class PengelolaController extends Controller
@@ -68,9 +69,10 @@ class PengelolaController extends Controller
     }
 
 
-    public function storepengeloxla(Request $request)
+    public function lihatdomain()
     {
-       //
+        $domain = domain::all();
+        return view('pengelola.lihatdomain',compact('domain'));
         
     }
 
@@ -82,6 +84,7 @@ class PengelolaController extends Controller
         $platform = platform::all();
         $id_counter = pengajuan::count();
         $id_pengajuan = $id_counter++;
+        $pesan_default = 'Belum ada Pesan';
         
         $folder = 'public/sertifikat';
         $filename = $id_pengajuan.'_Surat_'.$user_id.'_'. $request->file('surat')->getClientOriginalName();
@@ -93,7 +96,9 @@ class PengelolaController extends Controller
             'nama_domain' => $request->nama_domain,
             'desk_domain' => $request->desk_domain,
             'surat' => $filename,
-            'status' => 0
+            'status' => 0,
+            'pesan' =>  $pesan_default,
+            'created_at'=>now()
         ]);
 
 

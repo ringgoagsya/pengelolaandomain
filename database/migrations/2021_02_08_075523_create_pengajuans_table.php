@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreatePengajuansTable extends Migration
 {
@@ -21,6 +22,7 @@ class CreatePengajuansTable extends Migration
             $table->string('desk_domain');
             $table->string('surat');
             $table->string('status');
+            $table->string('pesan')->Nullable;
             $table->timestamps();
         });
     }

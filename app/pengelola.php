@@ -21,6 +21,10 @@ class pengelola extends Model
     {
         return $this->belongsTo(unit::class,'id_unit','id');
     }
+    public function pengajuan()
+    {
+        return $this->hasMany(pengajuan::class,'id_user','id');
+    }
     //public function platform()
     //{
     //    return $this->belongsTo(platform::class,'id_platform');

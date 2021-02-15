@@ -48,26 +48,26 @@
 
             <li class="nav-item">
             <a class="nav-link" href="{{route('indexadmins')}}">
-                <i class="ni ni-folder-17 text-yellow"></i>
+                <i class="fa fa-folder text-blue"></i>
                 <span class="nav-link-text">Permohonan Baru</span>
             </a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="ni ni-folder-17 text-yellow"></i>
+            <a class="nav-link" href="{{route('indexname')}}">
+                <i class="fa fa-folder-open text-blue"></i>
                 <span class="nav-link-text">Daftar Domain</span>
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="ni ni-single-02"></i>
+            <a class="nav-link" href="{{route('referensiadmin')}}">
+                <i class="fa fa-info-circle text-blue"></i>
                 <span class="nav-link-text">Referensi</span>
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="ni ni-single-02"></i>
+            <a class="nav-link" href="{{route('profiladmin')}}">
+                <i class="fa fa-user-circle text-blue"></i>
                 <span class="nav-link-text">Profil</span>
             </a>
             </li>

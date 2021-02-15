@@ -38,20 +38,24 @@
                     <div class="card-body">
                          <div class="card">
                          	
-
+<div class="table-responsive">
             <table class="table align-items-center table-dark" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
+                    <th>No</th>
                     <th>Platform</th>
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
                     <th>Aksi</th>
+                    <th>Tambah Domain</th>
+                    <th>Pesan</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($pengajuan as $ra)
                     <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>
                             <!-- {@if($ra->id_platform==1)
                             {
@@ -85,10 +89,17 @@
                                   <a href="{{ route('tolak', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
 
-                                @elseif($ra->status==1 || $ra->status==2)
-                                {!!$ra->status_text!!}
+                                @elseif($ra->status==3)
+                                <a href="{{ route('terima', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                                 @endif
                         </td>
+                        <td>
+                          <a href="{{route('adddomain',[$ra->id])}}" class="btn btn-primary 
+                            @if ($ra->status!=3)
+                                disabled
+                            @endif
+                            btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
+                          </td>
 
                         <td>
                           @if ($ra->catatan_dosen)
@@ -105,6 +116,7 @@
                 @endforelse
                 </tbody>
             </table>
+</div>
         </div>
 
         <div class="card-footer">

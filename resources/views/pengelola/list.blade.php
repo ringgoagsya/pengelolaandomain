@@ -38,10 +38,11 @@
                     <div class="card-body">
                          <div class="card">
                          	
-
+<div class="table-responsive">
             <table class="table align-items-center table-dark" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
+                    <th>No</th>
                     <th>Platform</th>
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
@@ -54,6 +55,7 @@
                 <tbody>
                 @forelse($pengajuan as $ra)
                     <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>
                             <!-- {@if($ra->id_platform==1)
                             {
@@ -97,8 +99,8 @@
                           </td>
 
                         <td>
-                          @if ($ra->catatan_dosen)
-                          {{$ra->catatan_dosen}}
+                          @if ($ra->pesan)
+                          {{$ra->pesan}}
                           @else
                           Belum Ada Pesan
                           @endif
@@ -111,6 +113,7 @@
                 @endforelse
                 </tbody>
             </table>
+</div>
         </div>
 
         <div class="card-footer">

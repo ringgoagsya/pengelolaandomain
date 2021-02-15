@@ -50,4 +50,12 @@ class pengajuan extends Model
     {
         return $this->belongsTo(platform::class,'id_platform','id');
     }
+    public function domain()
+    {
+        return $this->belongsTo(domain::class,'id_pengajuan','id');
+    }
+    public function pengelola()
+    {
+        return $this->hasOne(pengelola::class,'id','id_user');
+    }
 }

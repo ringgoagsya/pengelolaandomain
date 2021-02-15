@@ -47,21 +47,27 @@
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" href="{{route('pengelolaIndex')}}">
-                <i class="ni ni-folder-17 text-yellow"></i>
+          <a class="nav-link" href="{{route('daftardomain')}}">
+                <i class="fa fa-folder text-blue"></i>
                 <span class="nav-link-text">Permohonan Baru</span>
             </a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" href="/pengelola/daftardomain">
-                <i class="ni ni-folder-17 text-yellow"></i>
+            <a class="nav-link" href="{{route('lihatdomain')}}">
+                <i class="fa fa-folder-open text-blue"></i>
                 <span class="nav-link-text">Daftar Domain</span>
             </a>
             </li>
             <li class="nav-item">
+            <a class="nav-link" href="{{route('referensi')}}">
+                <i class="fa fa-info-circle text-blue"></i>
+                <span class="nav-link-text">Referensi Nama Domain</span>
+            </a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="{{route('profil')}}">
-                <i class="ni ni-single-02"></i>
+                <i class="fa fa-user-circle text-blue"></i>
                 <span class="nav-link-text">Profil</span>
             </a>
             </li>

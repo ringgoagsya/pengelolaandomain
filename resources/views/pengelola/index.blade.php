@@ -21,7 +21,11 @@
                 </div>
                 <div class="form-group">
                     <label for="nama_domain">Nama Domain</label>
-                    <input type="text" name="nama_domain" id="nama_domain" placeholder="Nama Domain" class="form-control">
+                    <div class="d-flex">
+                    <input type="text" name="nama_domain" id="nama_domain" placeholder="Nama Domain" class="form-control">&nbsp;
+                    <a href="{{ route('referensi')}}" type="button" class="btn btn-primary btn-sm" title="info nama domain"><i class="fas fa-info" title="info nama domain"></i></a>
+                    </div>
+                    
                 </div>
                 <div class="form-group">
                     <label for="desk_domain">Deskripsi Domain</label>
