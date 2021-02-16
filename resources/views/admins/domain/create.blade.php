@@ -11,7 +11,24 @@
               <form action="{{route('storedomain',$pengajuan->id)}}" method="post">
                 @csrf
                 <div class="form-group">
-
+                <div class="table-responsive">
+            <table class="table align-items-center table-dark" style="text-align: center;">
+                <thead class="thead-dark"> 
+                <tr>
+                <td>Nama Domain</td>
+                <td>Deskripsi Domain</td>
+                <td>Platform</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td> {{$pengajuan->nama_domain}}</td>
+                <td> {{$pengajuan->desk_domain}}</td>
+                <td> {{$pengajuan->platform->nama_platform}} </td>
+                </tr>
+                </tbody>
+                </table>
+                <br>
                 </div>
                 <div class="form-group">
                     <label for="ip">IP Address</label>

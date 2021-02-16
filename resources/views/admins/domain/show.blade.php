@@ -32,9 +32,7 @@
                             Cek Kembali Input Anda !!
                         </div>
                         @endif
-                  <center>
-                   <a type="button" class="btn btn-outline-primary col-md-11" href = "{{route('pengelolaIndex')}}">Tambah Pengajuan Domain</a> <br>
-                  </center>
+                  
                     <div class="card-body">
                          <div class="card">
                          	
@@ -89,8 +87,8 @@
                         </td>
 
                         <td>
-                          @if ($domain->pesan)
-                          {{$domain->pesan}}
+                          @if ($domain->pengajuan->pesan)
+                          {{$domain->pengajuan->pesan}}
                           @else
                           Belum Ada Pesan
                           @endif

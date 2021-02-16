@@ -1,5 +1,6 @@
 @extends('layouts.baseadmin')
 @section('content')
+
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -85,25 +86,34 @@
                         
                         <td>
                         @if ($ra->status==0)
-                                  <a href="{{ route('terima', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
-                                  <a href="{{ route('tolak', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
+                                  <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Terima Domain" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+                                  <a href="{{ route('tolak', [$ra->id]) }}" type="button" title="Tolak Domain" class="btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
 
                                 @elseif($ra->status==3)
-                                <a href="{{ route('terima', [$ra->id]) }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                                <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Detail Domain" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                                <a  type="button" title="Tambah Pesan" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$ra->id}}"><i class="fa fa-plus-square"></i></a>
+                                <a href="{{ route('tolak', [$ra->id]) }}" type="button" title="Tolak Domain" class="btn btn-danger btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
+                                </i></a>
+                                @elseif($ra->status==1)
+                                <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Terima Domain" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
+                                <a type="button" title="Tambah Pesan" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$ra->id}}"><i class="fa fa-plus-square"></i></a>
                                 @endif
                         </td>
                         <td>
+                        
+                        @if($ra->id>0)
                           <a href="{{route('adddomain',[$ra->id])}}" class="btn btn-primary 
                             @if ($ra->status!=3)
                                 disabled
                             @endif
                             btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
                           </td>
+                        @endif
 
                         <td>
-                          @if ($ra->catatan_dosen)
-                          {{$ra->catatan_dosen}}
+                          @if ($ra->pesan)
+                          {{$ra->pesan}}
                           @else
                           Belum Ada Pesan
                           @endif
@@ -130,3 +140,42 @@
         </div>
     </div>
 @endsection
+@section('modal')
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($pengajuan as $ra)
+<div class="modal fade" id="exampleModal{{$ra->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pesan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="{{ route('tambahpesan', [$ra->id]) }}" method="post">
+      @csrf
+        <div class="form-group">
+            <label for="pesan">Tambah Pesan</label>
+            <input type="text" name="pesan" id="pesan" placeholder="Masukkan Pesan" class="form-control">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+            </div>
+        </div>
+    
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endsection
+

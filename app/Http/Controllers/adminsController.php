@@ -28,7 +28,17 @@ class adminsController extends Controller
         $user_id = auth()->user()->id;
         $pengajuan = pengajuan::all();
         $domain = domain::all();
-        return view('admins.daftar',compact('pengajuan','user_id'));
+        return view('admins.daftar',compact('pengajuan','user_id','domain'));
+    }
+    public function tambahpesan(Request $request,$id)
+    {
+        pengajuan::where('id', $id)
+              ->update(['pesan' => $request->pesan]);
+              $pengajuan=pengajuan::all();
+            
+            
+            return view('admins.daftar', compact('pengajuan'))->with('pesan','Berhasil Menambah Pesan');
+
     }
     public function home()
     {
@@ -49,10 +59,12 @@ class adminsController extends Controller
     public function tolak($id){
         $update=pengajuan::where('id', $id)
               ->update(['status' => 1]);
+              $pengajuan=pengajuan::all();
+
             
 
 
-        return view('admins.tolak', compact('update'))->with('pesan','Pengajuan ditolak');
+        return view('admins.daftar', compact('update','pengajuan'))->with('pesan','Pengajuan ditolak');
         
     }
 
@@ -83,9 +95,10 @@ class adminsController extends Controller
             'id_pengajuan'=>$id_pengajuan->id,
             'ip' => $request->ip,
             'username'=>$request->username,
-            'password'=>$request->password
+            'password'=>$request->password,
+            'created_at'=>now()
         ]);
-        return redirect()->back();
+        return redirect()->route('indexname')->with('pesan','Berhasil Ajukan Pembuatan Domain');;
     }
 
     /**

@@ -69,10 +69,21 @@ class PengelolaController extends Controller
     }
 
 
-    public function lihatdomain()
+    public function lihatdomain(Request $id)
     {
-        $domain = domain::all();
-        return view('pengelola.lihatdomain',compact('domain'));
+        $status = config('status.status');
+        $user_id = auth()->user()->id;
+        $pengajuan=pengajuan::where('id_user',$user_id)->first();
+        if($pengajuan>0){
+            $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
+            return view('pengelola.lihatdomain',compact('domain','pengajuan'));
+        }
+        else{
+            $domain=domain::find($id);
+            return view('pengelola.lihatdomain',compact('pengajuan','domain'));
+        }
+        
+        
         
     }
 

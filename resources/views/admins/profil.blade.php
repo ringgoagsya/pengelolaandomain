@@ -15,7 +15,7 @@
                     <div class="card-body">
                          <div class="card">
                          	
-
+<div class="table-responsive">
             <table class="table align-items-center table-dark" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
@@ -48,6 +48,7 @@
                 @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div class="card-footer">

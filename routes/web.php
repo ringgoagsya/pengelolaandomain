@@ -42,6 +42,7 @@ Route::post('/pengelola/index','PengelolaController@storepengajuan')->name('peng
 Route::get('/admins/daftardomain','adminsController@index')->name('indexadmins');
 Route::get('/admins/referensi','DomainController@referensiadmin')->name('referensiadmin');
 Route::get('/admins/terima/{id}', 'adminsController@terima')->name('terima');
+Route::post('/admins/tambahpesan/{id}', 'adminsController@tambahpesan')->name('tambahpesan');
 Route::get('/admins/tolak/{id}', 'adminsController@tolak')->name('tolak');
 Route::get('/admins/adddomain/{id}','adminsController@create')->name('adddomain');
 Route::post('/admins/adddomain/{id}','adminsController@store')->name('storedomain');

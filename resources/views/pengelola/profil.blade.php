@@ -32,13 +32,11 @@
                             Cek Kembali Input Anda !!
                         </div>
                         @endif
-                  <center>
-                   <a type="button" class="btn btn-outline-primary col-md-11" href = "{{route('pengelolaIndex')}}">Tambah Pengajuan Domain</a> <br>
-                  </center>
+                  
                     <div class="card-body">
                          <div class="card">
                          	
-
+<div class="table-responsive">
             <table class="table align-items-center table-dark" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
@@ -82,6 +80,7 @@
                 @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div class="card-footer">
