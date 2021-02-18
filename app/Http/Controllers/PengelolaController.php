@@ -29,11 +29,14 @@ class PengelolaController extends Controller
     }
     public function index()
     {
+       
         $status = config('status.status');
         $user_id = auth()->user()->id;
+        $pengelola = pengelola::where('id',$user_id)->first();
         $pengajuan = pengajuan::where('id_user',$user_id)->get();
+
         $platform = platform::all();
-        return view('pengelola.index', compact('pengajuan','platform','user_id','status'));
+        return view('pengelola.index', compact('pengajuan','platform','user_id','status','pengelola'));
     }
 
     public function home()
@@ -50,6 +53,13 @@ class PengelolaController extends Controller
         $pengajuan = pengajuan::where('id_user',$user_id)->get();
         $platform = platform::all();
         return view('pengelola.list',compact('pengajuan','platform','status'));
+    }
+    public function detailprofil($id)
+    {
+        $user_id = auth()->user()->id;
+        $unit = unit::all();
+        $pengelola = pengelola::find($id);
+        return view('pengelola.profil.edit',compact('pengelola','unit'));
     }
     public function profil()
     {
@@ -74,7 +84,7 @@ class PengelolaController extends Controller
         $status = config('status.status');
         $user_id = auth()->user()->id;
         $pengajuan=pengajuan::where('id_user',$user_id)->first();
-        if($pengajuan>0){
+        if($pengajuan!=null){
             $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
             return view('pengelola.lihatdomain',compact('domain','pengajuan'));
         }

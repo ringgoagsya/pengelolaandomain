@@ -56,9 +56,19 @@ class DomainController extends Controller
      * @param  \App\domain  $domain
      * @return \Illuminate\Http\Response
      */
-    public function show(domain $domain)
+    public function detaildomain($id)
     {
-        //
+        $domain=domain::find($id);
+        return view('pengelola.detail',compact('domain'));
+        // $pengajuan=pengajuan::where('id',$domain->id)->get();
+        // if($pengajuan!=null){
+        //     $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
+        //     return view('pengelola.detail',compact('domain','pengajuan'));
+        // }
+        // else{
+        //     $domain=domain::find($id);
+        //     return view('pengelola.detail',compact('pengajuan','domain'));
+        // }
     }
 
     /**

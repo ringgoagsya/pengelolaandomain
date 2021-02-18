@@ -43,7 +43,6 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>No</th>
-                    <th>ID Pengajuan</th>
                     <th>Nama Pengelola</th>
                     <th>Nama Domain</th>
                     <th>IP Address</th>
@@ -57,23 +56,7 @@
                 @forelse($domain as $domain)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>
-                            <!-- {@if($domain->id_platform==1)
-                            {
-                                Wordpress
-                            }
-                            @elseif($domain->id_platform==2)
-                            {
-                                CMS
-                            }
-                            @else
-                            {
-                                belum memilih
-                            }
-                            @endif} -->
-                            {{$domain->id_pengajuan}}
-                            
-                        </td>
+                    
                         <td>
                         {{$domain->pengajuan->pengelola->name}}
                         </td>
@@ -90,7 +73,7 @@
                         {{$domain->password}}
                         </td>
                         <td>
-                          <a href="" class="btn btn-primary btn-sm" title="Detail Domain"><i class="fa fa-search" aria-hidden="true"></i></a>
+                          <a href="{{route('detaildomain',[$domain->id])}} " class="btn btn-primary btn-sm" title="Detail Domain"><i class="fa fa-search" aria-hidden="true"></i></a>
                           </td>
 
                         <td>

@@ -28,6 +28,10 @@
                     
                 </div>
                 <div class="form-group">
+                  <div color='blue'> Referensi Domain : nama + {{$pengelola->unit->alamat_domain}} = himpunan.{{$pengelola->unit->alamat_domain}} </div>
+                
+                </div>
+                <div class="form-group">
                     <label for="desk_domain">Deskripsi Domain</label>
                     <input type="textarea" name="desk_domain" id="desk_domain" placeholder="Deskripsi Domain" class="form-control">
                 </div>

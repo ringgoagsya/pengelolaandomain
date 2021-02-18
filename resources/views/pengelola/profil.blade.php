@@ -68,7 +68,7 @@
                         </td>
                         
                         <td>
-                          <a href="" class="btn btn-primary  btn-sm" title="Edit Profil" ><i class="far fa-edit" aria-hidden="true" title="Edit Profil"></i></a>
+                          <a href="{{route('detailprofil',[$ra->id])}}" class="btn btn-primary  btn-sm" title="Edit Profil" ><i class="far fa-edit" aria-hidden="true" title="Edit Profil"></i></a>
                         </td>
                          
 

@@ -35,7 +35,9 @@ Route::get('/pengelola/referensi','DomainController@referensi')->name('referensi
 Route::get('/pengelola/index','PengelolaController@index')->name('pengelolaIndex');
 Route::get('/pengelola/daftardomain','PengelolaController@daftardomain')->name('daftardomain');
 Route::get('/pengelola/lihatdomain','PengelolaController@lihatdomain')->name('lihatdomain');
+Route::get('/pengelola/detaildomain/{id}','DomainController@detaildomain')->name('detaildomain');
 Route::get('/pengelola/profil','PengelolaController@profil')->name('profil');
+Route::get('/pengelola/detailprofil/{id}','PengelolaController@detailprofil')->name('detailprofil');
 Route::post('/pengelola/index','PengelolaController@storepengajuan')->name('pengajuanstore');
 
 //Route Admin
