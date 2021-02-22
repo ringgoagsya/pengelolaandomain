@@ -51,44 +51,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($domain as $domain)
+                @forelse($domain as $dom)
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>
-                            <!-- {@if($domain->id_platform==1)
-                            {
-                                Wordpress
-                            }
-                            @elseif($domain->id_platform==2)
-                            {
-                                CMS
-                            }
-                            @else
-                            {
-                                belum memilih
-                            }
-                            @endif} -->
-                            {{$domain->id_pengajuan}}
+                            {{$dom->id_pengajuan}}
                             
                         </td>
-                        <td>{{$domain->pengajuan->nama_domain}}</td>
+                        <td>{{$dom->pengajuan->nama_domain}}</td>
                         <td>
-                        {{$domain->pengajuan->pengelola->name}}
+                        {{$dom->pengajuan->pengelola->name}}
                         </td>
                         <td>
-                        {{$domain->ip}}
+                        {{$dom->ip}}
                         </td>
                         <td>
-                          {{$domain->username}}
+                          {{$dom->username}}
                         </td>
                         <td>
-                          <a href=""  title="Edit" ><i class="fa fa-edit btn btn-primary btn-sm" aria-hidden="true"></i></a>
-                          <a href="" title="Delete" ><i class="fa fa-trash btn btn-danger btn-sm" aria-hidden="true"></i></a>
+                          <a href="{{route('editdomain',[$dom->id])}}"  title="Edit" ><i class="fa fa-edit btn btn-primary btn-sm" aria-hidden="true"></i></a>
+                          <a href="#" type="button" title="hapus Domain" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#ModalHapus{{$dom->id}}"><i class="fa fa-trash"></i></a>
                         </td>
 
                         <td>
-                          @if ($domain->pengajuan->pesan)
-                          {{$domain->pengajuan->pesan}}
+                          @if ($dom->pengajuan->pesan)
+                          {{$dom->pengajuan->pesan}}
                           @else
                           Belum Ada Pesan
                           @endif
@@ -114,4 +101,39 @@
             </div>
         </div>
     </div>
+@endsection
+@section('modal')
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($domain as $dom)
+<div class="modal fade" id="ModalHapus{{$dom->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Menghapus Domain ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+            <form action="{{ route('deletedomain',[$dom->id]) }}" method="post">
+            @csrf
+            @method('delete')
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button  type="submit" title="Hapus" class="btn btn-danger" class="btn btn-danger">Ya</button>
+            </div>
+            </form>
+            </div>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 @endsection

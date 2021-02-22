@@ -41,24 +41,25 @@ class PengelolaController extends Controller
 
     public function home()
     {
-        $pengelola=pengelola::all();
         $user_id = auth()->user()->id;
+        $pengelola = pengelola::where('id',$user_id)->first();
+        
         return view('pengelola.pengelola',compact('pengelola','user_id'));
     }
     
-    public function daftardomain(Request $id)
+    public function daftardomain(Request $request)
     {
-        $status = config('status.status');
+        $status= $request->status;
         $user_id = auth()->user()->id;
-        $pengajuan = pengajuan::where('id_user',$user_id)->get();
+        $pengajuan = pengajuan::where('status',$status)->where('id_user',$user_id)->get();
         $platform = platform::all();
         return view('pengelola.list',compact('pengajuan','platform','status'));
     }
-    public function detailprofil($id)
+    public function detailprofil()
     {
         $user_id = auth()->user()->id;
         $unit = unit::all();
-        $pengelola = pengelola::find($id);
+        $pengelola = pengelola::find($user_id);
         return view('pengelola.profil.edit',compact('pengelola','unit'));
     }
     public function profil()
@@ -79,19 +80,25 @@ class PengelolaController extends Controller
     }
 
 
-    public function lihatdomain(Request $id)
+    public function lihatdomain()
     {
         $status = config('status.status');
         $user_id = auth()->user()->id;
-        $pengajuan=pengajuan::where('id_user',$user_id)->first();
-        if($pengajuan!=null){
-            $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
-            return view('pengelola.lihatdomain',compact('domain','pengajuan'));
-        }
-        else{
-            $domain=domain::find($id);
-            return view('pengelola.lihatdomain',compact('pengajuan','domain'));
-        }
+        $pengajuan=pengajuan::where('id_user',$user_id)->get();
+        $domain = domain::join('pengajuans','pengajuans.id','=','domains.id_pengajuan')->where('pengajuans.id_user','=',$user_id)->get();
+        //dd($domain);
+        return view('pengelola.lihatdomain',compact('domain','pengajuan'));
+        
+        // dd($pengajuan[$counter]);
+        
+        // if($pengajuan!=null){
+        //     $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
+            
+        // }
+        // else{
+        //     $domain=domain::find($id);
+        //     return view('pengelola.lihatdomain',compact('pengajuan','domain'));
+        // }
         
         
         
@@ -123,9 +130,7 @@ class PengelolaController extends Controller
         ]);
 
 
-
-
-        return redirect()->route('daftardomain')->with('pesan','Berhasil Ajukan Pembuatan Domain');
+        return redirect()->route('daftardomain',['status'=> 0])->with('pesan','Berhasil Ajukan Pembuatan Domain');
     }
 
     /**
@@ -145,9 +150,40 @@ class PengelolaController extends Controller
      * @param  \App\pengelola  $pengelola
      * @return \Illuminate\Http\Response
      */
-    public function edit(pengelola $pengelola)
+    public function confirm(Request $request, $id)
     {
-        //
+        $pengelola =pengelola::find($id);
+        
+        if($pengelola->password == $request->password)
+        {
+            return redirect()->route('detailprofil',[$pengelola->id]);
+        }
+        else
+        {
+            echo"password sakah";
+        }
+    }
+    public function editprofil(Request $request)
+    {
+        $user_id = auth()->user()->id;
+        $request->validate([
+            'name' => 'required',
+            'penanggung_jawab' => 'required',
+            'telp' => 'required',
+            'email' => 'required'
+        ]);
+
+       pengelola::where('id', $user_id)
+              ->update([
+                'name' => $request->name,
+                'penanggung_jawab' => $request->penanggung_jawab,
+                'id_unit'=>$request->id_unit,
+                'telp' => $request->telp,
+                'email' => $request->email
+              ]);
+
+        $pengelola = pengelola::where('id',$user_id)->get();
+        return view('pengelola.profil', compact('pengelola'))->with('pesan','Berhasil Edit profil');
     }
 
     /**

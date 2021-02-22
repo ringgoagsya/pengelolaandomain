@@ -86,17 +86,17 @@
                         
                         <td>
                         @if ($ra->status==0)
-                                  <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Terima Domain" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
-                                  <a href="{{ route('tolak', [$ra->id]) }}" type="button" title="Tolak Domain" class="btn btn-primary btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
+                                  <a href="#" type="button" title="Terima Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTerima{{$ra->id}}"><i class="fas fa-check"></i></a>
+                                  <a href="#" type="button" title="Tolak Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTolak{{$ra->id}}"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
 
                                 @elseif($ra->status==3)
-                                <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Detail Domain" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                                <a href="{{route('detailpengajuan',[$ra->id])}}" type="button" title="Detail Domain" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i></a>
                                 <a  type="button" title="Tambah Pesan" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$ra->id}}"><i class="fa fa-plus-square"></i></a>
-                                <a href="{{ route('tolak', [$ra->id]) }}" type="button" title="Tolak Domain" class="btn btn-danger btn-sm"><i class="fa fa-ban" aria-hidden="true"></i>
+                                <a href="#" type="button" title="Tolak Domain" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ModalTolak{{$ra->id}}"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
                                 @elseif($ra->status==1)
-                                <a href="{{ route('terima', [$ra->id]) }}" type="button" title="Terima Domain" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
+                                <a href="#" type="button" title="Terima Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTerima{{$ra->id}}"><i class="fa fa-check"></i></a>
                                 <a type="button" title="Tambah Pesan" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$ra->id}}"><i class="fa fa-plus-square"></i></a>
                                 @endif
                         </td>
@@ -172,6 +172,69 @@
         </div>
     
       </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endsection
+@section('modal1')
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($pengajuan as $ra)
+<div class="modal fade" id="ModalTolak{{$ra->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yakin Menolak Domain ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <a href="{{ route('tolak', [$ra->id]) }}" type="submit" class="btn btn-dangerweb">Ya</a>
+            </div>
+            </div>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+@endsection
+@section('modal2')
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($pengajuan as $ra)
+<div class="modal fade" id="ModalTerima{{$ra->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yakin Menerima Domain ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <a href="{{ route('terima', [$ra->id]) }}" type="submit" class="btn btn-primary">Ya</a>
+            </div>
+            </div>
+        </div>
+    
       </div>
     </div>
   </div>

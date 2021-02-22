@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
     type="text/css">
   <!-- Page plugins -->
+
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0" type="text/css') }}">
   {{-- DataTables CSS --}}
@@ -46,18 +47,28 @@
             </a>
             </li>
 
-            <li class="nav-item">
-          <a class="nav-link" href="{{route('daftardomain')}}">
-                <i class="fa fa-folder text-blue"></i>
-                <span class="nav-link-text">Permohonan Baru</span>
-            </a>
+            
+            <li class="nav-item dropdown">
+                <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-folder text-blue"></i>
+                  <span class="sr-only">Permohonan Baru</span>
+                  <span>Permohonan Baru</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbar-default_dropdown_1">
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=0">Pengajuan</a>
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=3">Diterima</a>
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=1">Ditolak</a>
+                </ul>
             </li>
+            
+            
 
             <li class="nav-item">
             <a class="nav-link" href="{{route('lihatdomain')}}">
                 <i class="fa fa-folder-open text-blue"></i>
                 <span class="nav-link-text">Daftar Domain</span>
             </a>
+            
             </li>
             <li class="nav-item">
             <a class="nav-link" href="{{route('referensi')}}">
@@ -71,6 +82,7 @@
                 <span class="nav-link-text">Profil</span>
             </a>
             </li>
+            
           
         </ul>
       </div>
@@ -95,6 +107,7 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
     @yield('content')
+    @yield('modal')
     </div>
           <!-- Footer -->
           <footer class="footer pt-0">

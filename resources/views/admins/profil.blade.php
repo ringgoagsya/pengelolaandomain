@@ -43,7 +43,7 @@
                          
                 @empty
                     <tr>
-                        <td colspan="5">Belum ada list ide TA</td>
+                        <td colspan="5">Data tidak ada</td>
                     </tr>
                 @endforelse
                 </tbody>

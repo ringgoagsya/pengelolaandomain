@@ -47,8 +47,6 @@
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
-                    <th>-</th>
-                    <th>-</th>
                     <th>Pesan</th>
                 </tr>
                 </thead>
@@ -82,21 +80,7 @@
                         <td>
                           {!!$ra->status_text!!}
                         </td>
-                        <td>
-                          <a href="{{route('tambahjudul',[$ra->id])}}" class="btn btn-primary 
-                            @if ($ra->status!=2)
-                                disabled
-                            @endif
-                            btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
-                         
-                          <td>
-                            <a href="{{route('tdos',[$ra->id])}}" class="btn btn-primary btn-sm 
-                              @if ($ra->status!=2)
-                                  disabled 
-                              @endif
-                              " ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
+                        
 
                         <td>
                           @if ($ra->pesan)

@@ -73,7 +73,7 @@
                         {{$domain->password}}
                         </td>
                         <td>
-                          <a href="{{route('detaildomain',[$domain->id])}} " class="btn btn-primary btn-sm" title="Detail Domain"><i class="fa fa-search" aria-hidden="true"></i></a>
+                          <a href="{{route('detaildomain',[$domain->id_pengajuan])}} " class="btn btn-primary btn-sm" title="Detail Domain"><i class="fa fa-search" aria-hidden="true"></i></a>
                           </td>
 
                         <td>

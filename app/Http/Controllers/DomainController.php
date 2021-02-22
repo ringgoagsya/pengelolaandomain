@@ -58,7 +58,9 @@ class DomainController extends Controller
      */
     public function detaildomain($id)
     {
-        $domain=domain::find($id);
+        
+        $domain=domain::where('id_pengajuan',$id)->first();
+        //dd($domain);
         return view('pengelola.detail',compact('domain'));
         // $pengajuan=pengajuan::where('id',$domain->id)->get();
         // if($pengajuan!=null){
@@ -77,9 +79,10 @@ class DomainController extends Controller
      * @param  \App\domain  $domain
      * @return \Illuminate\Http\Response
      */
-    public function edit(domain $domain)
+    public function edit(domain $domain,$id)
     {
-        //
+        $domain =domain::find($id);
+        return view('admins.domain.edit', compact('domain'));
     }
 
     /**
@@ -89,9 +92,15 @@ class DomainController extends Controller
      * @param  \App\domain  $domain
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, domain $domain)
+    public function update(Request $request, $id)
     {
-        //
+      domain::where('id',$id)-> update([
+            'ip' => $request->ip,
+            'username'=>$request->username,
+            'password'=>$request->password,
+            'updated_at'=>now()
+        ]);
+        return redirect()->route('indexname')->with('pesan','Berhasil Update Domain');
     }
 
     /**
@@ -100,8 +109,10 @@ class DomainController extends Controller
      * @param  \App\domain  $domain
      * @return \Illuminate\Http\Response
      */
-    public function destroy(domain $domain)
+    public function destroy(domain $domain,$id)
     {
-        //
+        $domain = domain::find($id);
+        $domain->delete();
+        return redirect()->route('indexname')->with('pesan','Berhasil Hapus Domain');
     }
 }

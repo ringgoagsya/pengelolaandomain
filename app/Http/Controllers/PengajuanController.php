@@ -44,9 +44,10 @@ class PengajuanController extends Controller
      * @param  \App\pengajuan  $pengajuan
      * @return \Illuminate\Http\Response
      */
-    public function show(pengajuan $pengajuan)
+    public function show(pengajuan $pengajuan,$id)
     {
-        //
+        $pengajuan=pengajuan::find($id);
+        return view('admins.pengajuan.show',compact('pengajuan'));
     }
 
     /**

@@ -47,11 +47,17 @@
             </a>
             </li>
 
-            <li class="nav-item">
-            <a class="nav-link" href="{{route('indexadmins')}}">
-                <i class="fa fa-folder text-blue"></i>
-                <span class="nav-link-text">Permohonan Baru</span>
-            </a>
+            <li class="nav-item dropdown">
+                <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-folder text-blue"></i>
+                  <span class="sr-only">Permohonan Baru</span>
+                  <span>Permohonan Baru</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbar-default_dropdown_1">
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=0">Pengajuan</a>
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=3">Diterima</a>
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=1">Ditolak</a>
+                </ul>
             </li>
 
             <li class="nav-item">
@@ -97,6 +103,11 @@
     <div class="container-fluid mt--6">
     @yield('content')
     @yield('modal')
+    @yield('modal1')
+    @yield('modal2')
+    @yield('modal3')
+    @yield('modal4')
+    @yield('modal5')
     </div>
           <!-- Footer -->
           <footer class="footer pt-0">

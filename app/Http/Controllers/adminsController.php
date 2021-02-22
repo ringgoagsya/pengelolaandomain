@@ -22,13 +22,12 @@ class adminsController extends Controller
     {
         $this->middleware('auth:admins');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $status = config('status.status');
-        $user_id = auth()->user()->id;
-        $pengajuan = pengajuan::all();
+        $status= $request->status;
+        $pengajuan = pengajuan::where('status',$status)->get();
         $domain = domain::all();
-        return view('admins.daftar',compact('pengajuan','user_id','domain'));
+        return view('admins.daftar',compact('pengajuan','domain'));
     }
     public function tambahpesan(Request $request,$id)
     {
@@ -98,7 +97,7 @@ class adminsController extends Controller
             'password'=>$request->password,
             'created_at'=>now()
         ]);
-        return redirect()->route('indexname')->with('pesan','Berhasil Ajukan Pembuatan Domain');;
+        return redirect()->route('indexname')->with('pesan','Berhasil Ajukan Pembuatan Domain');
     }
 
     /**
