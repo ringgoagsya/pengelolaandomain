@@ -38,24 +38,16 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'pengelolas',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'pengelolas',
             'hash' => false,
         ],
         // MultiLogin Ringgo
-        'mahasiswa' => [
-            'driver' => 'session',
-            'provider' => 'mahasiswa',
-        ],
-
-        'apimahasiswa' => [
-            'driver' => 'token',
-            'provider' => 'mahasiswa',
-        ],
+       
         'admins' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -64,24 +56,6 @@ return [
         'apiadmins' => [
             'driver' => 'token',
             'provider' => 'admins',
-        ],
-        'dosen' => [
-            'driver' => 'session',
-            'provider' => 'dosen',
-        ],
-
-        'apidosen' => [
-            'driver' => 'token',
-            'provider' => 'dosen',
-        ],
-        'user' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'apiuser' => [
-            'driver' => 'token',
-            'provider' => 'users',
         ],
         'pengelolas' => [
             'driver' => 'session',
@@ -112,21 +86,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class,
-        ],
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\login_admin::class,
-        ],
-        'mahasiswa' => [
-            'driver' => 'eloquent',
-            'model' => App\login_mahasiswa::class,
-        ],
-        'dosen' => [
-            'driver' => 'eloquent',
-            'model' => App\login_dosen::class,
         ],
         'pengelolas' => [
             'driver' => 'eloquent',

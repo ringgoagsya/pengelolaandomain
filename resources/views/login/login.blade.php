@@ -41,7 +41,21 @@
 					@if(session('pesanregister'))
                     <h5 class="login100-form-title p-b-34">
                       <div class="alert alert-success" role="alert">
+					 	 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
                         <i class="ni ni-like-2"></i> {{session('pesanregister')}}
+                      </div>
+                    </h5>
+                    @endif
+					@if(session('pesangagallogin'))
+                    <h5 class="login100-form-title p-b-34">
+                      <div class="alert alert-danger alert-sm" role="alert">
+					  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+                        <i class="ni ni-like-2"></i> {{session('pesangagallogin')}}
+						
                       </div>
                     </h5>
                     @endif
@@ -66,7 +80,7 @@
 				</form>
 				
 
-				<div class="login100-more" style="background-image: url('login/images/bg-01.jpg');"></div>
+				<div class="login100-more" style="background-image: url('login/images/bg-02.jpeg');"></div>
 			</div>
 		</div>
 	</div>
@@ -89,6 +103,7 @@
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect1')
 		});
+		$('.alert').alert();
 	</script>
 <!--===============================================================================================-->
 	<script src="login/vendor/daterangepicker/moment.min.js"></script>
