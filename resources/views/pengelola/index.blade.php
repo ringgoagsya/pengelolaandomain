@@ -25,6 +25,11 @@
                     <input type="text" name="nama_domain" id="nama_domain" placeholder="Nama Domain" class="form-control">&nbsp;
                     <a href="{{ route('referensi')}}" type="button" class="btn btn-primary btn-sm" title="info nama domain"><i class="fas fa-info" title="info nama domain"></i></a>
                     </div>
+                    @error('nama_domain')
+                     <div class="mt-2 text-danger">
+                        {{$message}}
+                     </div>
+                    @enderror
                     
                 </div>
                 <div class="form-group">
@@ -34,7 +39,13 @@
                 <div class="form-group">
                     <label for="desk_domain">Deskripsi Domain</label>
                     <input type="textarea" name="desk_domain" id="desk_domain" placeholder="Deskripsi Domain" class="form-control">
+                    @error('desk_domain')
+                      <div class="mt-2 text-danger">
+                        {{$message}}
+                      </div>
+                    @enderror
                 </div>
+                
                 
                     <div class="row">
                     <div class="col-md-6">
@@ -45,7 +56,11 @@
                             <div class="input-group">
                             <input type="file" class="form-control" name="surat" id="surat">
                             </div>
-                        
+                            @error('surat')
+                            <div class="mt-2 text-danger">
+                                {{$message}}
+                            </div>
+                            @enderror
                         </div> 
                     </div>
                     </div>

@@ -68,6 +68,23 @@ class PengelolaController extends Controller
         $pengelola = pengelola::where('id',$user_id)->get();
         return view('pengelola.profil',compact('pengelola'));
     }
+    public function detaildomain()
+    {
+        $user_id = auth()->user()->id;
+        $pengajuan=pengajuan::where('id_user',$user_id)->get();
+        $domain = domain::join('pengajuans','pengajuans.id','=','domains.id_pengajuan')->where('pengajuans.id_user','=',$user_id)->first();
+        $domain = domain::where('id_pengajuan',$domain->id_pengajuan)->first();
+        return view('pengelola.detail',compact('domain'));
+        // $pengajuan=pengajuan::where('id',$domain->id)->get();
+        // if($pengajuan!=null){
+        //     $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
+        //     return view('pengelola.detail',compact('domain','pengajuan'));
+        // }
+        // else{
+        //     $domain=domain::find($id);
+        //     return view('pengelola.detail',compact('pengajuan','domain'));
+        // }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -105,7 +122,12 @@ class PengelolaController extends Controller
     }
 
     public function storepengajuan(Request $request){
-        
+        $request->validate([
+            'id_platform'=>'required',
+            'nama_domain'=>'required',
+            'desk_domain'=>'required',
+            'surat'=>'required',
+        ]);
         $status = config('status.status');
         $user_id = auth()->user()->id;
         $pengajuan = pengajuan::where('id_user',$user_id)->get();
@@ -117,6 +139,7 @@ class PengelolaController extends Controller
         $folder = 'public/sertifikat';
         $filename = $id_pengajuan.'_Surat_'.$user_id.'_'. $request->file('surat')->getClientOriginalName();
         $filepath = $request->surat->storeAs($folder,$filename);
+
 
         $pengajuan = pengajuan::insertGetId([
             'id_user'=> $user_id,
@@ -152,6 +175,9 @@ class PengelolaController extends Controller
      */
     public function confirm(Request $request, $id)
     {
+        $request->validate([
+            'password'=>'required',
+        ]);
         $pengelola =pengelola::find($id);
         
         if($pengelola->password == $request->password)
@@ -160,7 +186,7 @@ class PengelolaController extends Controller
         }
         else
         {
-            echo"password sakah";
+            return view('pengelola.profil', compact('pengelola'))->with('pesan','Password Salah');
         }
     }
     public function editprofil(Request $request)

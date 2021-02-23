@@ -31,12 +31,16 @@ class adminsController extends Controller
     }
     public function tambahpesan(Request $request,$id)
     {
+        $request->validate([
+            'pesan'=>'required',
+        ]);
         pengajuan::where('id', $id)
               ->update(['pesan' => $request->pesan]);
-              $pengajuan=pengajuan::all();
+        $status_pengajuan=pengajuan::where('id', $id)->first();
+        $status_pengajuan=$status_pengajuan->status;
             
             
-            return view('admins.daftar', compact('pengajuan'))->with('pesan','Berhasil Menambah Pesan');
+            return redirect()->route('indexadmins',['status'=> $status_pengajuan])->with('pesan','Berhasil Menambah Pesan');
 
     }
     public function home()
@@ -49,21 +53,21 @@ class adminsController extends Controller
 
         pengajuan::where('id', $id)
               ->update(['status' => 3]);
-              $pengajuan=pengajuan::all();
+              $status_pengajuan=pengajuan::where('id', $id)->first();
+        $status_pengajuan=$status_pengajuan->status;
             
             
-            return view('admins.daftar', compact('pengajuan'))->with('pesan','Berhasil Menerima pengajuan');
-    
+        return redirect()->route('indexadmins',['status'=> $status_pengajuan])->with('pesan','Berhasil menerima');
     }
     public function tolak($id){
         $update=pengajuan::where('id', $id)
               ->update(['status' => 1]);
               $pengajuan=pengajuan::all();
-
-            
-
-
-        return view('admins.daftar', compact('update','pengajuan'))->with('pesan','Pengajuan ditolak');
+              $status_pengajuan=pengajuan::where('id', $id)->first();
+              $status_pengajuan=$status_pengajuan->status;
+                  
+                  
+              return redirect()->route('indexadmins',['status'=> $status_pengajuan])->with('pesan','Berhasil Menolak');
         
     }
 
@@ -89,6 +93,11 @@ class adminsController extends Controller
      */
     public function store(Request $request,$id)
     {
+        $request->validate([
+            'ip' => 'required',
+            'username' => 'required',
+            'password'=>'required',
+        ]);
         $id_pengajuan=pengajuan::find($id);
         $domain=domain::insertGetId([
             'id_pengajuan'=>$id_pengajuan->id,
@@ -97,7 +106,11 @@ class adminsController extends Controller
             'password'=>$request->password,
             'created_at'=>now()
         ]);
-        return redirect()->route('indexname')->with('pesan','Berhasil Ajukan Pembuatan Domain');
+        $status_pengajuan=pengajuan::where('id', $id)->first();
+              $status_pengajuan=$status_pengajuan->status;
+                  
+                  
+              return redirect()->route('indexadmins',['status'=> $status_pengajuan])->with('pesan','Berhasil Ajukan Pembuatan Domain');
     }
 
     /**

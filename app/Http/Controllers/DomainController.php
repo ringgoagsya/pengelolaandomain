@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\domain;
 use App\pengajuan;
 use App\pengelola;
-
+use App\login_pengelola;
+use App\platform;
+use App\unit;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -56,10 +58,11 @@ class DomainController extends Controller
      * @param  \App\domain  $domain
      * @return \Illuminate\Http\Response
      */
-    public function detaildomain($id)
+    public function detaildomain()
     {
-        
-        $domain=domain::where('id_pengajuan',$id)->first();
+        $user_id = auth()->user()->id;
+        dd($user_id);
+        $domain=domain::where('id_pengajuan',$user_id)->first();
         //dd($domain);
         return view('pengelola.detail',compact('domain'));
         // $pengajuan=pengajuan::where('id',$domain->id)->get();
@@ -94,6 +97,11 @@ class DomainController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ip'=>'required',
+            'username'=>'required',
+            'password'=>'required',
+        ]);
       domain::where('id',$id)-> update([
             'ip' => $request->ip,
             'username'=>$request->username,

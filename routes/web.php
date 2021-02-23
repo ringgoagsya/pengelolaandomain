@@ -32,7 +32,7 @@ Route::get('/pengelola/referensi','DomainController@referensi')->name('referensi
 Route::get('/pengelola/index','PengelolaController@index')->name('pengelolaIndex');
 Route::get('/pengelola/daftardomain','PengelolaController@daftardomain')->name('daftardomain');
 Route::get('/pengelola/lihatdomain','PengelolaController@lihatdomain')->name('lihatdomain');
-Route::get('/pengelola/detaildomain/{id}','DomainController@detaildomain')->name('detaildomain');
+Route::get('/pengelola/detaildomain','PengelolaController@detaildomain')->name('detaildomain');
 Route::get('/pengelola/profil','PengelolaController@profil')->name('profil');
 Route::get('/pengelola/detailprofil','PengelolaController@detailprofil')->name('detailprofil');
 Route::patch('/pengelola/detailprofil','PengelolaController@editprofil')->name('editprofil');
