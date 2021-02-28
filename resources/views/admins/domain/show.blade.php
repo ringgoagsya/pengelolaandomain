@@ -37,7 +37,7 @@
                          <div class="card">
                          	
 <div class="table-responsive">
-            <table class="table align-items-center table-dark" style="text-align: center;">
+            <table class="table align-items-center table-dark" id="datatable" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
                     <th>No</th>
@@ -46,6 +46,7 @@
                     <th>Nama Pengelola</th>
                     <th>IP Address</th>
                     <th>Username</th>
+                    <th>Tanggal Pembuatan</th>
                     <th>Aksi</th>
                     <th>Pesan</th>
                 </tr>
@@ -67,6 +68,9 @@
                         </td>
                         <td>
                           {{$dom->username}}
+                        </td>
+                        <td>
+                        {{$dom->created_at}}
                         </td>
                         <td>
                           <a href="{{route('editdomain',[$dom->id])}}"  title="Edit" ><i class="fa fa-edit btn btn-primary btn-sm" aria-hidden="true"></i></a>
@@ -136,4 +140,11 @@
   </div>
 </div>
 @endforeach
+@endsection
+@section('scripts')
+    <script>
+        $('#datatable').DataTable();
+    
+    
+    </script>
 @endsection

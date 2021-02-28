@@ -41,7 +41,7 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link active" href="">
+            <a class="nav-link active" href="/admins">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
             </a>
@@ -54,9 +54,24 @@
                   <span>Permohonan Baru</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbar-default_dropdown_1">
-                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=0">Pengajuan</a>
-                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=3">Diterima</a>
-                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=1">Ditolak</a>
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=0">
+                      <div class="d-flex justify-content-between">
+                          <span > Pengajuan</span>
+                          <span class="badge badge-primary">{{($status_pengajuan ?? '')}} </span>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=3">
+                      <div class="d-flex justify-content-between">
+                        <span> Diterima </span>
+                        <span class="badge badge-success">{{($status_diterima ?? '')}} </span>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="{{route('indexadmins')}}?status=1">
+                      <div class="d-flex justify-content-between">
+                        <span> Ditolak </span>
+                        <span class="badge badge-danger">{{($status_ditolak ?? '')}} </span>
+                      </div>
+                    </a>
                 </ul>
             </li>
 

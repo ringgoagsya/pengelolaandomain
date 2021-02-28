@@ -21,6 +21,31 @@ class PengelolaController extends Controller
     {
         $this->middleware('auth:pengelolas');
     }
+    public function status_count()
+    {
+        $user_id = auth()->user()->id;
+        $pengelola = pengelola::where('id',$user_id)->first();
+        $pengajuan = pengajuan::where('id_user',$user_id)->get();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        return compact('status_pengajuan','status_diterima','status_ditolak');
+    }
     public function daftarpengelola()
     {
         $pengelola=pengelola::all();
@@ -29,6 +54,10 @@ class PengelolaController extends Controller
     }
     public function index()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
        
         $status = config('status.status');
         $user_id = auth()->user()->id;
@@ -36,45 +65,92 @@ class PengelolaController extends Controller
         $pengajuan = pengajuan::where('id_user',$user_id)->get();
 
         $platform = platform::all();
-        return view('pengelola.index', compact('pengajuan','platform','user_id','status','pengelola'));
+        return view('pengelola.index', compact('pengajuan','platform','user_id','status','pengelola','status_pengajuan','status_diterima','status_ditolak'));
     }
 
     public function home()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $user_id = auth()->user()->id;
         $pengelola = pengelola::where('id',$user_id)->first();
+        $pengajuan = pengajuan::where('id_user',$user_id)->get();
         
-        return view('pengelola.pengelola',compact('pengelola','user_id'));
+        return view('pengelola.pengelola',compact('pengelola','user_id','pengajuan','status_pengajuan',
+        'status_diterima','status_ditolak'));
+    }
+    public function hitung_status(){
+        $user_id = auth()->user()->id;
+        $pengelola = pengelola::where('id',$user_id)->first();
+        $pengajuan = pengajuan::where('id_user',$user_id)->get();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        return compact('status_pengajuan','status_diterima','status_ditolak');
     }
     
     public function daftardomain(Request $request)
     {
         $status= $request->status;
         $user_id = auth()->user()->id;
-        $pengajuan = pengajuan::where('status',$status)->where('id_user',$user_id)->get();
+        $pengajuan = pengajuan::where('id_user',$user_id)->get();
         $platform = platform::all();
-        return view('pengelola.list',compact('pengajuan','platform','status'));
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
+        $pengajuan = pengajuan::where('status',$status)->where('id_user',$user_id)->get();
+        return view('pengelola.list',compact('pengajuan','platform','status','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function detailprofil()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $user_id = auth()->user()->id;
         $unit = unit::all();
         $pengelola = pengelola::find($user_id);
-        return view('pengelola.profil.edit',compact('pengelola','unit'));
+        return view('pengelola.profil.edit',compact('pengelola','unit','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function profil()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $user_id = auth()->user()->id;
         $pengelola = pengelola::where('id',$user_id)->get();
-        return view('pengelola.profil',compact('pengelola'));
+        return view('pengelola.profil',compact('pengelola','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function detaildomain()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $user_id = auth()->user()->id;
         $pengajuan=pengajuan::where('id_user',$user_id)->get();
         $domain = domain::join('pengajuans','pengajuans.id','=','domains.id_pengajuan')->where('pengajuans.id_user','=',$user_id)->first();
         $domain = domain::where('id_pengajuan',$domain->id_pengajuan)->first();
-        return view('pengelola.detail',compact('domain'));
+        return view('pengelola.detail',compact('domain','status_pengajuan','status_diterima','status_ditolak'));
         // $pengajuan=pengajuan::where('id',$domain->id)->get();
         // if($pengajuan!=null){
         //     $domain = domain::where('id_pengajuan',$pengajuan->id)->get();
@@ -99,12 +175,16 @@ class PengelolaController extends Controller
 
     public function lihatdomain()
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $status = config('status.status');
         $user_id = auth()->user()->id;
         $pengajuan=pengajuan::where('id_user',$user_id)->get();
         $domain = domain::join('pengajuans','pengajuans.id','=','domains.id_pengajuan')->where('pengajuans.id_user','=',$user_id)->get();
         //dd($domain);
-        return view('pengelola.lihatdomain',compact('domain','pengajuan'));
+        return view('pengelola.lihatdomain',compact('domain','pengajuan','status_pengajuan','status_diterima','status_ditolak'));
         
         // dd($pengajuan[$counter]);
         
@@ -128,6 +208,7 @@ class PengelolaController extends Controller
             'desk_domain'=>'required',
             'surat'=>'required',
         ]);
+        
         $status = config('status.status');
         $user_id = auth()->user()->id;
         $pengajuan = pengajuan::where('id_user',$user_id)->get();
@@ -175,6 +256,10 @@ class PengelolaController extends Controller
      */
     public function confirm(Request $request, $id)
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $request->validate([
             'password'=>'required',
         ]);
@@ -186,11 +271,15 @@ class PengelolaController extends Controller
         }
         else
         {
-            return view('pengelola.profil', compact('pengelola'))->with('pesan','Password Salah');
+            return view('pengelola.profil', compact('pengelola','status_pengajuan','status_diterima','status_ditolak'))->with('pesan','Password Salah');
         }
     }
     public function editprofil(Request $request)
     {
+        $status_count=$this::status_count();
+        $status_pengajuan= $status_count['status_pengajuan'];
+        $status_diterima = $status_count['status_diterima'];
+        $status_ditolak=$status_count['status_ditolak'];
         $user_id = auth()->user()->id;
         $request->validate([
             'name' => 'required',
@@ -209,7 +298,7 @@ class PengelolaController extends Controller
               ]);
 
         $pengelola = pengelola::where('id',$user_id)->get();
-        return view('pengelola.profil', compact('pengelola'))->with('pesan','Berhasil Edit profil');
+        return view('pengelola.profil', compact('pengelola','status_pengajuan','status_diterima','status_ditolak'))->with('pesan','Berhasil Edit profil');
     }
 
     /**

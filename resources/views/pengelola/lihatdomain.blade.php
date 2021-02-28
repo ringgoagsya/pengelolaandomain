@@ -39,7 +39,7 @@
                          <div class="card">
                          	
 <div class="table-responsive">
-            <table class="table align-items-center table-dark" style="text-align: center;">
+            <table class="table align-items-center table-dark" id="datatable" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
                     <th>No</th>
@@ -105,4 +105,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $('#datatable').DataTable();
+    
+    
+    </script>
 @endsection

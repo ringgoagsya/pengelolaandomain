@@ -22,15 +22,43 @@ class adminsController extends Controller
     {
         $this->middleware('auth:admins');
     }
+    public function status()
+    {
+        $pengajuan = pengajuan::all();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        return compact('status_pengajuan','status_diterima','status_ditolak');
+    }
     public function index(Request $request)
     {
         $status= $request->status;
+        $status_rq=$this::status();
+        $status_pengajuan= $status_rq['status_pengajuan'];
+        $status_diterima = $status_rq['status_diterima'];
+        $status_ditolak=$status_rq['status_ditolak'];
         $pengajuan = pengajuan::where('status',$status)->get();
         $domain = domain::all();
-        return view('admins.daftar',compact('pengajuan','domain'));
+        return view('admins.daftar',compact('pengajuan','domain','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function tambahpesan(Request $request,$id)
     {
+        
         $request->validate([
             'pesan'=>'required',
         ]);
@@ -39,7 +67,7 @@ class adminsController extends Controller
         $status_pengajuan=pengajuan::where('id', $id)->first();
         $status_pengajuan=$status_pengajuan->status;
             
-            
+         
             return redirect()->route('indexadmins',['status'=> $status_pengajuan])->with('pesan','Berhasil Menambah Pesan');
 
     }
@@ -47,7 +75,13 @@ class adminsController extends Controller
     {
         $admins=admin::all();
         $user_id = auth()->user()->id;
-        return view('admins.admins',compact('admins','user_id'));
+        $pengajuan = pengajuan::all();
+        $status=$this::status();
+        $status_pengajuan= $status['status_pengajuan'];
+        $status_diterima = $status['status_diterima'];
+        $status_ditolak=$status['status_ditolak'];
+
+        return view('admins.admins',compact('admins','user_id','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function terima($id){
 
@@ -78,11 +112,15 @@ class adminsController extends Controller
      */
     public function create($id)
     {
+        $status=$this::status();
+        $status_pengajuan= $status['status_pengajuan'];
+        $status_diterima = $status['status_diterima'];
+        $status_ditolak=$status['status_ditolak'];
         $status = config('status.status');
         $user_id = auth()->user()->id;
         $pengajuan = pengajuan::find($id);
         $domain = domain::all();
-        return view('admins.domain.create',compact('pengajuan','user_id'));
+        return view('admins.domain.create',compact('pengajuan','user_id','status_pengajuan','status_diterima','status_ditolak'));
     }
 
     /**
@@ -121,9 +159,13 @@ class adminsController extends Controller
      */
     public function profiladmin()
     {
+        $status=$this::status();
+        $status_pengajuan= $status['status_pengajuan'];
+        $status_diterima = $status['status_diterima'];
+        $status_ditolak=$status['status_ditolak'];
         $user_id = auth()->user()->id;
         $admins = admin::where('id',$user_id)->get();
-        return view('admins.profil',compact('admins'));
+        return view('admins.profil',compact('admins','status','status_pengajuan','status_diterima','status_ditolak'));
     }
     public function show($id)
     {

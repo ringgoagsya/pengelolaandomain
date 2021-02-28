@@ -40,14 +40,15 @@
                          <div class="card">
                          	
 <div class="table-responsive">
-            <table class="table align-items-center table-dark" style="text-align: center;">
+            <table class="table align-items-center table-dark" id="datatable" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
-                    <th>No</th>
+                    <th>ID Pengajuan</th>
                     <th>Platform</th>
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
+                    <th>Tanggal Pengajuan</th>
                     <th>Aksi</th>
                     <th>Tambah Domain</th>
                     <th>Pesan</th>
@@ -56,7 +57,7 @@
                 <tbody>
                 @forelse($pengajuan as $ra)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{$ra->id}}</td>
                         <td>
                             <!-- {@if($ra->id_platform==1)
                             {
@@ -82,6 +83,9 @@
                         </td>
                         <td>
                           {!!$ra->status_text!!}
+                        </td>
+                        <td>
+                        {{$ra->created_at}}
                         </td>
                         
                         <td>
@@ -240,5 +244,12 @@
   </div>
 </div>
 @endforeach
+@endsection
+@section('scripts')
+    <script>
+        $('#datatable').DataTable();
+    
+    
+    </script>
 @endsection
 

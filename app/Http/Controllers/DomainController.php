@@ -20,7 +20,26 @@ class DomainController extends Controller
     public function index()
     {
         $domain = domain::all();
-        return view('admins.domain.show',compact('domain'));
+        $pengajuan = pengajuan::all();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        return view('admins.domain.show',compact('domain','status_pengajuan','status_diterima','status_ditolak'));
     }
 
     /**
@@ -34,11 +53,50 @@ class DomainController extends Controller
     }
     public function referensi()
     {
-        return view('pengelola.referensi');
+        $pengajuan = pengajuan::all();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        
+        return view('pengelola.referensi',compact('status_pengajuan','status_diterima','status_ditolak'));
     }
     public function referensiadmin()
     {
-        return view('admins.referensi');
+        $pengajuan = pengajuan::all();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
+        return view('admins.referensi',compact('status_pengajuan','status_diterima','status_ditolak'));
     }
 
     /**
@@ -84,8 +142,27 @@ class DomainController extends Controller
      */
     public function edit(domain $domain,$id)
     {
+        $pengajuan = pengajuan::all();
+        $status_pengajuan=0;
+        $status_diterima=0;
+        $status_ditolak=0;
+        foreach($pengajuan as $pengajuan){
+            if($pengajuan->status ==0 )
+            {
+                $status_pengajuan++;
+            }
+            elseif($pengajuan->status ==3 )
+            {
+                $status_diterima++;
+            }
+            elseif($pengajuan->status ==1 )
+            {
+                $status_ditolak++;
+            }
+
+        }
         $domain =domain::find($id);
-        return view('admins.domain.edit', compact('domain'));
+        return view('admins.domain.edit', compact('domain','status_pengajuan','status_diterima','status_ditolak'));
     }
 
     /**

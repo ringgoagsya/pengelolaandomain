@@ -39,7 +39,7 @@
                          <div class="card">
                          	
 <div class="table-responsive">
-            <table class="table align-items-center table-dark" style="text-align: center;">
+            <table class="table align-items-center table-dark" id="datatable" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
                     <th>No</th>
@@ -55,19 +55,6 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>
-                            <!-- {@if($ra->id_platform==1)
-                            {
-                                Wordpress
-                            }
-                            @elseif($ra->id_platform==2)
-                            {
-                                CMS
-                            }
-                            @else
-                            {
-                                belum memilih
-                            }
-                            @endif} -->
                             {{$ra->platform->nama_platform}}
                             
                         </td>
@@ -110,4 +97,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $('#datatable').DataTable();
+    
+    
+    </script>
 @endsection

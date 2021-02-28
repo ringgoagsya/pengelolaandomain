@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\admin;
 use App\pengelola;
 use Illuminate\Support\Facades\Auth;
-use\App\model\mahasiswa;
-use\App\model\dosen;
-use\App\model\user;
 
 use Illuminate\Http\Request;
 

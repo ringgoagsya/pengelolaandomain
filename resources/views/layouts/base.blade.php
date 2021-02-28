@@ -51,13 +51,29 @@
             <li class="nav-item dropdown">
                 <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-folder text-blue"></i>
-                  <span class="sr-only">Permohonan Baru</span>
                   <span>Permohonan Baru</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbar-default_dropdown_1">
-                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=0">Pengajuan</a>
-                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=3">Diterima</a>
-                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=1">Ditolak</a>
+                
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=0">
+                      <div class="d-flex justify-content-between">
+                          <span > Pengajuan</span>
+                          <span class="badge badge-primary">{{($status_pengajuan ?? '')}} </span>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=3">
+                      <div class="d-flex justify-content-between">
+                        <span> Diterima </span>
+                        <span class="badge badge-success">{{($status_diterima ?? '')}} </span>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="{{route('daftardomain')}}?status=1">
+                      <div class="d-flex justify-content-between">
+                        <span> Ditolak </span>
+                        <span class="badge badge-danger">{{($status_ditolak ?? '')}} </span>
+                      </div>
+                    </a>
+                
                 </ul>
             </li>
             
