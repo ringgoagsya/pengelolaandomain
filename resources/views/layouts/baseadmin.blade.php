@@ -123,11 +123,12 @@
     @yield('modal3')
     @yield('modal4')
     @yield('modal5')
-    </div>
+    
           <!-- Footer -->
           <footer class="footer pt-0">
         @include('include.footer')
       </footer>
+      </div>
     </div>
   </div>
 

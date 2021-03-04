@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group">
-                        <a class="btn btn-primary" href="/admins/daftardomain">OK</a>
+                        <a class="btn btn-primary" href="{{route('indexadmins')}}?status={{$pengajuan->status}}">OK</a>
                     </div>
                     </div>
                 </div>

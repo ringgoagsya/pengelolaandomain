@@ -47,6 +47,7 @@
                     <th>Nama Domain</th>
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
+                    <th>Tanggal Dibuat</th>
                     <th>Pesan</th>
                 </tr>
                 </thead>
@@ -66,6 +67,9 @@
                         </td>
                         <td>
                           {!!$ra->status_text!!}
+                        </td>
+                        <td>
+                            {{$ra->created_at}}
                         </td>
                         
 
@@ -87,9 +91,6 @@
 </div>
         </div>
 
-        <div class="card-footer">
-
-        </div>
 
     </div>
                     </div>
@@ -101,7 +102,5 @@
 @section('scripts')
     <script>
         $('#datatable').DataTable();
-    
-    
     </script>
 @endsection

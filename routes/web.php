@@ -47,6 +47,7 @@ Route::get('/admins/terima/{id}', 'adminsController@terima')->name('terima');
 Route::post('/admins/tambahpesan/{id}', 'adminsController@tambahpesan')->name('tambahpesan');
 Route::get('/admins/tolak/{id}', 'adminsController@tolak')->name('tolak');
 Route::get('/admins/pengajuan/detail/{id}','PengajuanController@show')->name('detailpengajuan');
+Route::get('/admins/pengajuan/berkas/{id}','adminsController@file')->name('lihatberkas');
 //Admin Aksi Domain
 Route::get('/admins/adddomain/{id}','adminsController@create')->name('adddomain');
 Route::post('/admins/adddomain/{id}','adminsController@store')->name('storedomain');

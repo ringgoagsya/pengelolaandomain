@@ -9,7 +9,9 @@ use App\unit;
 use App\login_admin;
 use App\admin;
 use App\domain;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class adminsController extends Controller
 {
@@ -45,6 +47,13 @@ class adminsController extends Controller
         }
         return compact('status_pengajuan','status_diterima','status_ditolak');
     }
+    
+    public function file(Request $request,$id)
+    {   
+        $pengajuan = pengajuan::where('id',$id)->first();
+        return Storage::disk('local_public')->download($pengajuan->surat);
+    }
+
     public function index(Request $request)
     {
         $status= $request->status;

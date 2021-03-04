@@ -40,7 +40,7 @@
                          <div class="card">
                          	
 <div class="table-responsive">
-            <table class="table align-items-center table-dark" id="datatable" style="text-align: center;">
+            <table class="table align-items-center table-dark" id="datatable" width="600px" style="text-align: center;">
                 <thead class="thead-dark">
                 <tr>
                     <th>ID Pengajuan</th>
@@ -49,6 +49,7 @@
                     <th>Deskripsi Domain</th>
                     <th>Status</th>
                     <th>Tanggal Pengajuan</th>
+                    <th>Berkas</th>
                     <th>Aksi</th>
                     <th>Tambah Domain</th>
                     <th>Pesan</th>
@@ -59,19 +60,6 @@
                     <tr>
                         <td>{{$ra->id}}</td>
                         <td>
-                            <!-- {@if($ra->id_platform==1)
-                            {
-                                Wordpress
-                            }
-                            @elseif($ra->id_platform==2)
-                            {
-                                CMS
-                            }
-                            @else
-                            {
-                                belum memilih
-                            }
-                            @endif} -->
                             {{$ra->platform->nama_platform}}
                             
                         </td>
@@ -87,9 +75,15 @@
                         <td>
                         {{$ra->created_at}}
                         </td>
-                        
+                        <td>
+                        <div class="d-flex">
+                        {{ \Illuminate\Support\Str::limit($ra->surat, 15, $end='...') }}
+                        <div class="d-inline-flex p-2 bd-highlight"><a href="{{route('lihatberkas',[$ra->id])}}" type="button" title="Lihat Berkas" class="btn btn-primary btn-sm"><i class="fa fa-file"></i></a></div>
+                        </div>
+                        </td>
                         <td>
                         @if ($ra->status==0)
+                        <a href="{{route('detailpengajuan',[$ra->id])}}" type="button" title="Detail Domain" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i></a>
                                   <a href="#" type="button" title="Terima Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTerima{{$ra->id}}"><i class="fas fa-check"></i></a>
                                   <a href="#" type="button" title="Tolak Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTolak{{$ra->id}}"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
@@ -100,20 +94,26 @@
                                 <a href="#" type="button" title="Tolak Domain" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ModalTolak{{$ra->id}}"><i class="fa fa-ban" aria-hidden="true"></i>
                                 </i></a>
                                 @elseif($ra->status==1)
+                                <a href="{{route('detailpengajuan',[$ra->id])}}" type="button" title="Detail Domain" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i></a>
                                 <a href="#" type="button" title="Terima Domain" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#ModalTerima{{$ra->id}}"><i class="fa fa-check"></i></a>
                                 <a type="button" title="Tambah Pesan" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{$ra->id}}"><i class="fa fa-plus-square"></i></a>
                                 @endif
                         </td>
                         <td>
-                        
-                        @if($ra->id>0)
+                        @if($ra->id>0 && $ra->status!=1 && $ra->status !=0)
                           <a href="{{route('adddomain',[$ra->id])}}" class="btn btn-primary 
-                            @if ($ra->status!=3)
-                                disabled
+                          @foreach($domain as $do)
+                            @if($ra->status!=3)
+                              disable
+                                @elseif($ra->id ==  $do->id_pengajuan)
+                                  disabled
                             @endif
+                          @endforeach
                             btn-sm" ><i class="far fa-edit" aria-hidden="true"></i></a>
-                          </td>
-                        @endif
+                         @endif
+                        
+                        
+                        </td>
 
                         <td>
                           @if ($ra->pesan)

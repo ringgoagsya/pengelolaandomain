@@ -28,7 +28,7 @@
 <body>
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-    <div class="scrollbar-inner">
+    <div class="">
       <!-- Brand -->
        <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
@@ -124,11 +124,12 @@
     <div class="container-fluid mt--6">
     @yield('content')
     @yield('modal')
-    </div>
+    
           <!-- Footer -->
           <footer class="footer pt-0">
         @include('include.footer')
       </footer>
+      </div>
     </div>
   </div>
 
@@ -139,8 +140,6 @@
   <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>
-  <script src="{{ asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-  <script src="{{ asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
   <!-- Optional JS -->
   <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>

@@ -48,6 +48,7 @@
                     <th>IP Address</th>
                     <th>Username</th>
                     <th>Password</th>
+                    <th>Tanggal Dibuat</th>
                     <th>Aksi</th>
                     <th>Pesan</th>
                 </tr>
@@ -71,6 +72,9 @@
                         </td>
                         <td>
                         {{$domain->password}}
+                        </td>
+                        <td>
+                            {{$domain->created_at}}
                         </td>
                         <td>
                           <a href="{{route('detaildomain',[$domain->id_pengajuan])}} " class="btn btn-primary btn-sm" title="Detail Domain"><i class="fa fa-search" aria-hidden="true"></i></a>
